@@ -1,5 +1,3 @@
-import re
-
 file_path = 'inputs/day3.txt'
 
 with open(file_path, 'r') as file:
@@ -53,7 +51,7 @@ def part_one():
                 numActual = ''
                 posicionesQueCheckear = []
 
-    print("La sol final de la parte 1 es "+str(solu))
+    return solu
 
 
 def encontrar_numero_completo(matriz, fila, col):
@@ -164,6 +162,8 @@ def part_two():
                 #print(x,y)
                 solu = solu + multiplicarGear(x,y)
 
-    print("La sol final de la parte 2 es "+str(solu))
-part_one()
-part_two()
+    return solu
+
+
+print("La solución de la parte uno es "+str(part_one()))
+print("La solución de la parte dos es "+str(part_two()))

@@ -17,7 +17,7 @@ def part_one():
         topBlue=0
 
         ngame=ngame+1
-        print(ngame)
+        #print(ngame)
         rondas = separar_juegos(game)
         for ronda in rondas:
             ronda = ronda.strip()
@@ -34,7 +34,7 @@ def part_one():
         if int(topRed) <= 12 and int(topGreen) <= 13 and int(topBlue) <= 14:
             sumatorio = sumatorio + ngame
 
-            print("Toma "+str(sumatorio))
+    return (sumatorio)
 
 
 def part_two():
@@ -49,10 +49,10 @@ def part_two():
         topBlue=0
 
         ngame=ngame+1
-        print(ngame)
+        #print(ngame)
         rondas = separar_juegos(game)
         for ronda in rondas:
-            print(ronda)
+            #print(ronda)
             ronda = ronda.strip()
             ronda = (re.sub(".*: ",'',ronda))
             turnos = ronda.split(', ')
@@ -66,10 +66,10 @@ def part_two():
                     topGreen = int(splited[0])
 
 
-        print(topRed,topBlue,topGreen)
+        #print(topRed,topBlue,topGreen)
         power = topRed*topBlue*topGreen
         sumatorio = sumatorio +power
-        print(sumatorio)
+    return sumatorio
 
-#part_one()
-part_two()
+print("La solución de la parte uno es "+str(part_one()))
+print("La solución de la parte dos es "+str(part_two()))

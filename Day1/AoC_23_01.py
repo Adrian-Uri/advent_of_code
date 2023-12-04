@@ -71,5 +71,5 @@ def part_two():
     return res
 
 
-print(part_one())
-print(part_two())
+print("La solución de la parte uno es "+str(part_one()))
+print("La solución de la parte dos es "+str(part_two()))
