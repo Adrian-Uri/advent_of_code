@@ -26,7 +26,6 @@ def comprobarPosi(x,y):
             # Check if the new indices are within bounds
             if 0 <= new_row < len(mapa) and 0 <= new_col < len(mapa[0]):
                 adjacent_elements.append(mapa[new_row][new_col])
-    print(adjacent_elements)
     for elemento in adjacent_elements:
         if not elemento.isdigit() and not (elemento == '.'):
             return True
@@ -42,27 +41,19 @@ def part_one():
         x=x+1
         y=-1
         for elemento in linea:
-            print(elemento)
             y=y+1
             if elemento.isdigit():
-                print("entro en A")
                 numActual= numActual + elemento
                 posicionesQueCheckear.append([x,y])
-                print("Numero actual es "+ numActual)
-                print("las posicionesQueCheckear son "+ str(posicionesQueCheckear))
             elif numActual:
-                print(("Entro en B"))
                 for elemento in posicionesQueCheckear:
                     if (comprobarPosi(elemento[0],elemento[1])):
-                        print("Efectivamente, pega con un elemento")
-                        print("Aumento la solu de "+ str(solu) +" en "+ str(numActual))
                         solu= solu + int(numActual)
                         numActual=0
-                print("Hago Reset del numero actual y de las posiciones a comprobar")
                 numActual = ''
                 posicionesQueCheckear = []
 
-    print(solu)
+    print("La sol final de la parte 1 es "+str(solu))
 
 
 def encontrar_numero_completo(matriz, fila, col):
@@ -97,27 +88,37 @@ def encontrar_numero_completo(matriz, fila, col):
     return "", None
 
 
+
 # def obtenerPrimeraPosicion(tuplas):
+#     print (tuplas)
 #     combinaciones_mas_bajas = {}
-#     print("Aquiiiiii")
-#     print(tuplas)
+#
 #     for numero_completo, posicion in tuplas:
 #         if numero_completo not in combinaciones_mas_bajas or posicion < combinaciones_mas_bajas[numero_completo][1]:
 #             combinaciones_mas_bajas[numero_completo] = (numero_completo, posicion)
-#     print(combinaciones_mas_bajas)
-#     return list(combinaciones_mas_bajas.values())
+#
+#     # Filtrar duplicados basados en el número completo
+#     combinaciones_unicas = {v[0]: v for v in combinaciones_mas_bajas.values()}
+#
+#     return list(combinaciones_unicas.values())
+
 
 def obtenerPrimeraPosicion(tuplas):
-    combinaciones_mas_bajas = {}
+    valores_mas_bajos = {}
 
-    for numero_completo, posicion in tuplas:
-        if numero_completo not in combinaciones_mas_bajas or posicion < combinaciones_mas_bajas[numero_completo][1]:
-            combinaciones_mas_bajas[numero_completo] = (numero_completo, posicion)
+    for identificador, posicion in tuplas:
+        valor_y = posicion[1]
+        valor_x = posicion[0]
 
-    # Filtrar duplicados basados en el número completo
-    combinaciones_unicas = {v[0]: v for v in combinaciones_mas_bajas.values()}
+        if identificador not in valores_mas_bajos or (
+                valor_y < valores_mas_bajos[identificador][1] and valor_x != valores_mas_bajos[identificador][0]):
+            valores_mas_bajos[identificador] = (valor_x, valor_y)
+    #print(valores_mas_bajos)
+    return list(valores_mas_bajos.items())
 
-    return list(combinaciones_unicas.values())
+
+
+
 
 def multiplicarGear(x,y):
     mapa = []
@@ -137,12 +138,14 @@ def multiplicarGear(x,y):
                 if mapa[new_row][new_col].isdigit():
                     numerosActuales.append(encontrar_numero_completo(mapa,new_row,new_col))
 
-
+    #print(numerosActuales)
     numerosGear=(obtenerPrimeraPosicion(numerosActuales))
-    print(numerosGear)
     solu=1
-    for elemento in numerosGear:
-        solu = solu*int(elemento[0])
+    if len(numerosGear) == 2:
+        for elemento in numerosGear:
+            solu = solu*int(elemento[0])
+    else:
+        solu=0
     return (solu)
 
 def part_two():
@@ -158,9 +161,9 @@ def part_two():
         for elemento in linea:
             y = y + 1
             if elemento == "*":
-                print(x,y)
+                #print(x,y)
                 solu = solu + multiplicarGear(x,y)
 
-    print(solu)
-
+    print("La sol final de la parte 2 es "+str(solu))
+part_one()
 part_two()
